@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+
+  book-db:
+    image: postgres:15
+    container_name: "book-service-db"
+    restart: always
+    ports:
+      - "5435:5435"
+    environment:
+      POSTGRES_USERNAME: "postgres"
+      POSTGRES_PASSWORD: 148
+      POSTGRES_DB: course_work
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+      PGPORT: 5435
+    volumes:
+      - ./book-db:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d course_work" ]
+      interval: 10s
+      timeout: 5s
+      retries: 7
+      start_period: 10s
+
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4GB
+
