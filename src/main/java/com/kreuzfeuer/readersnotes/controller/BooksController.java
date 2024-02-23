@@ -1,9 +1,9 @@
 package com.kreuzfeuer.readersnotes.controller;
 
 
-import com.kreuzfeuer.readersnotes.dto.BookDto;
-import com.kreuzfeuer.readersnotes.entity.Book;
-import com.kreuzfeuer.readersnotes.entity.User;
+import com.kreuzfeuer.readersnotes.domain.dto.BookDTO;
+import com.kreuzfeuer.readersnotes.domain.entity.Book;
+import com.kreuzfeuer.readersnotes.domain.entity.User;
 import com.kreuzfeuer.readersnotes.service.BookService;
 import com.kreuzfeuer.readersnotes.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -31,16 +31,16 @@ public class BooksController {
             description = "Get list of books for the user"
     )
     @GetMapping()
-    public ResponseEntity<List<BookDto>> getAllBooks(Principal principal) {
+    public ResponseEntity<List<BookDTO>> getAllBooks(Principal principal) {
         return ResponseEntity.ok(
-                BookDto.fromBooksToList(bookService.getListBookByUserEmail(principal.getName())));
+                BookDTO.fromBooksToList(bookService.getListBookByUserEmail(principal.getName())));
     }
     @Operation( description = "Get book by id for the user")
     @GetMapping("/{id}")
-    public ResponseEntity<BookDto> getBookById(@PathVariable("id") Long id, Principal principal) {
+    public ResponseEntity<BookDTO> getBookById(@PathVariable("id") Long id, Principal principal) {
         Optional<Book> optBook = bookService.findBookByIdAndUserEmail(id, principal.getName());
         return optBook.map(book -> ResponseEntity.ok(
-                BookDto.fromBookToDTO(book))).orElseGet(() -> ResponseEntity.notFound().build());
+                BookDTO.fromBookToDTO(book))).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @Operation(description = "Delete book by id for the user")
@@ -57,27 +57,27 @@ public class BooksController {
 
     @Operation(description = "Delete book by id for the user")
     @PostMapping("")
-    public ResponseEntity<BookDto> addBook(@RequestBody BookDto bookDto, Principal principal) {
-        Book book = BookDto.fromDTOtoBook(bookDto);
-        book.setUser(userService.findByLogin(principal.getName()));
+    public ResponseEntity<BookDTO> addBook(@RequestBody BookDTO bookDTO, Principal principal) {
+        Book book = BookDTO.fromDTOtoBook(bookDTO);
+        book.setUser(userService.findByEmail(principal.getName()));
         bookService.save(book);
-        return ResponseEntity.ok(BookDto.fromBookToDTO(book));
+        return ResponseEntity.ok(BookDTO.fromBookToDTO(book));
     }
 
     @Operation(description = "Update book for the user")
     @PutMapping("")
-    public ResponseEntity<BookDto> updateBookById(@RequestBody BookDto bookDto, Principal principal) {
+    public ResponseEntity<BookDTO> updateBookById(@RequestBody BookDTO bookDTO, Principal principal) {
 
-        Optional<Book> book = bookService.findBookByIdAndUserEmail(bookDto.getId(), principal.getName());
+        Optional<Book> book = bookService.findBookByIdAndUserEmail(bookDTO.getId(), principal.getName());
         if (book.isEmpty()) {
-            User user = userService.findByLogin(principal.getName());
-            Book newBook = BookDto.fromDTOtoBook(bookDto);
+            User user = userService.findByEmail(principal.getName());
+            Book newBook = BookDTO.fromDTOtoBook(bookDTO);
             newBook.setUser(user);
             Book saved = bookService.save(newBook);
-            return ResponseEntity.status(201).body(BookDto.fromBookToDTO(saved));
+            return ResponseEntity.status(201).body(BookDTO.fromBookToDTO(saved));
         }
-        bookDto.updateBookFromDto(book.get());
-        return ResponseEntity.ok(BookDto.fromBookToDTO(book.get()));
+        bookDTO.updateBookFromDto(book.get());
+        return ResponseEntity.ok(BookDTO.fromBookToDTO(book.get()));
     }
 
 

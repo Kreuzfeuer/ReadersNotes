@@ -1,4 +1,4 @@
-package com.kreuzfeuer.readersnotes.security;
+package com.kreuzfeuer.readersnotes.config;
 
 import com.kreuzfeuer.readersnotes.repository.TokenRepository;
 import com.kreuzfeuer.readersnotes.service.JwtService;

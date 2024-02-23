@@ -1,6 +1,6 @@
 package com.kreuzfeuer.readersnotes.repository;
 
-import com.kreuzfeuer.readersnotes.entity.Token;
+import com.kreuzfeuer.readersnotes.domain.entity.Token;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

@@ -1,9 +1,11 @@
-package com.kreuzfeuer.readersnotes.dto;
+package com.kreuzfeuer.readersnotes.domain.dto;
 
-import com.kreuzfeuer.readersnotes.entity.Book;
-import com.kreuzfeuer.readersnotes.entity.enums.BookRating;
-import com.kreuzfeuer.readersnotes.entity.enums.BookStatus;
+import com.kreuzfeuer.readersnotes.domain.entity.enums.BookRating;
+import com.kreuzfeuer.readersnotes.domain.entity.enums.BookStatus;
+import com.kreuzfeuer.readersnotes.domain.entity.Book;
 
+import jakarta.annotation.Nullable;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,12 +19,14 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookDto {
+public class BookDTO {
+    @Nullable
     private Long id;
+    @NotBlank(message = "Name cannot be null")
     private String bookName;
 
     private String author;
-
+    @Nullable
     private LocalDate dateAdded;
 
     private String description;
@@ -31,10 +35,10 @@ public class BookDto {
 
     private BookRating rating;
 
-    public  static List<BookDto> fromBooksToList(List<Book> books){
-        List<BookDto> dtos = new ArrayList<>();
+    public  static List<BookDTO> fromBooksToList(List<Book> books){
+        List<BookDTO> dtos = new ArrayList<>();
         books.forEach(x -> dtos.add(
-                BookDto.builder()
+                BookDTO.builder()
                         .id(x.getId())
                         .bookName(x.getBookName())
                         .author(x.getAuthor())
@@ -46,8 +50,8 @@ public class BookDto {
         );
         return dtos;
     }
-    public static BookDto fromBookToDTO(Book book){
-        return BookDto.builder()
+    public static BookDTO fromBookToDTO(Book book){
+        return BookDTO.builder()
                 .id(book.getId())
                 .bookName(book.getBookName())
                 .author(book.getAuthor())
@@ -58,7 +62,7 @@ public class BookDto {
                 .build();
     }
 
-    public static Book fromDTOtoBook(BookDto book){
+    public static Book fromDTOtoBook(BookDTO book){
         return Book.builder()
                 .id(book.getId())
                 .bookName(book.getBookName())

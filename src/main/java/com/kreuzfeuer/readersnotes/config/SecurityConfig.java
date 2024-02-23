@@ -1,6 +1,5 @@
 package com.kreuzfeuer.readersnotes.config;
 
-import com.kreuzfeuer.readersnotes.security.JwtAuthFilter;
 import com.kreuzfeuer.readersnotes.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

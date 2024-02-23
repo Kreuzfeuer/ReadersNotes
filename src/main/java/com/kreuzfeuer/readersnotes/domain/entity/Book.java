@@ -1,8 +1,8 @@
-package com.kreuzfeuer.readersnotes.entity;
+package com.kreuzfeuer.readersnotes.domain.entity;
 
 
-import com.kreuzfeuer.readersnotes.entity.enums.BookRating;
-import com.kreuzfeuer.readersnotes.entity.enums.BookStatus;
+import com.kreuzfeuer.readersnotes.domain.entity.enums.BookRating;
+import com.kreuzfeuer.readersnotes.domain.entity.enums.BookStatus;
 import jakarta.persistence.*;
 import lombok.*;
 

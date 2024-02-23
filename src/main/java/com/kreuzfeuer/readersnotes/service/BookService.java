@@ -1,7 +1,7 @@
 package com.kreuzfeuer.readersnotes.service;
 
 
-import com.kreuzfeuer.readersnotes.entity.Book;
+import com.kreuzfeuer.readersnotes.domain.entity.Book;
 
 import java.util.List;
 import java.util.Optional;

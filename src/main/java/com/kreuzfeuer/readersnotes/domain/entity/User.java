@@ -1,4 +1,4 @@
-package com.kreuzfeuer.readersnotes.entity;
+package com.kreuzfeuer.readersnotes.domain.entity;
 
 
 import jakarta.persistence.*;

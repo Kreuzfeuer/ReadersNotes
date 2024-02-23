@@ -1,7 +1,7 @@
 package com.kreuzfeuer.readersnotes.service.impl;
 
 
-import com.kreuzfeuer.readersnotes.entity.Book;
+import com.kreuzfeuer.readersnotes.domain.entity.Book;
 import com.kreuzfeuer.readersnotes.repository.BookRepository;
 import com.kreuzfeuer.readersnotes.service.BookService;
 import lombok.RequiredArgsConstructor;

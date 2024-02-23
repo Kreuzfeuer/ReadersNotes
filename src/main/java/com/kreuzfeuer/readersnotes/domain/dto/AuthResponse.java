@@ -1,4 +1,4 @@
-package com.kreuzfeuer.readersnotes.dto;
+package com.kreuzfeuer.readersnotes.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

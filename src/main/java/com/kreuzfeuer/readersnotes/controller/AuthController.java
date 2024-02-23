@@ -1,8 +1,8 @@
 package com.kreuzfeuer.readersnotes.controller;
 
 
-import com.kreuzfeuer.readersnotes.dto.AuthRequest;
-import com.kreuzfeuer.readersnotes.dto.AuthResponse;
+import com.kreuzfeuer.readersnotes.domain.dto.AuthRequest;
+import com.kreuzfeuer.readersnotes.domain.dto.AuthResponse;
 
 import com.kreuzfeuer.readersnotes.service.AuthService;
 
@@ -34,13 +34,6 @@ public class AuthController {
         return ResponseEntity.ok(authService.authenticate(request));
     }
 
-//    @PostMapping("/refresh-token")
-//    public void refreshToken(
-//            HttpServletRequest request,
-//            HttpServletResponse response
-//    ) throws IOException {
-//        authService.refreshToken(request, response);
-//    }
 }
 
 
